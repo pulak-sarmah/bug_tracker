@@ -6,18 +6,18 @@
   --foreground-rgb: 0, 0, 0;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-  }
-} */
-
 body {
   color: rgb(var(--foreground-rgb));
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .nav-links {
+    @apply text-primary-600 hover:text-primary-900 transition-all font-semibold;
+  }
+  .nav-effects {
+    @apply hover:scale-105 active:scale-95 transition-all;
+  }
+  .flex-center {
+    @apply flex items-center;
   }
 }
