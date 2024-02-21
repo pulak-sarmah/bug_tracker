@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { Button, Callout, TextField } from "@radix-ui/themes";
+import { Button, Callout, Text, TextField } from "@radix-ui/themes";
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
@@ -10,55 +10,76 @@ import { toolbarOptions } from "@/constants/simpleMdeOptions";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-interface IssueForm {
-  title: string;
-  description: string;
-}
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createIssueSchema } from "@/app/validationSchemas";
+import { z } from "zod";
+
+type IssueForm = z.infer<typeof createIssueSchema>;
 
 const NewIssuePage = () => {
   let description = "";
   const router = useRouter();
-  const { register, handleSubmit } = useForm<IssueForm>();
-  const [error, setError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<IssueForm>({
+    resolver: zodResolver(createIssueSchema),
+  });
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const descriptionRef = useRef(description);
 
   const onSubmit = handleSubmit(async (data) => {
-    data.description = descriptionRef.current;
     try {
-      console.log(data);
+      setLoading(true);
       await axios.post("/api/issues", data);
       router.push("/issues");
     } catch (error) {
       console.error(error);
-      setError("An unexpected error has occured.");
+      setErr("An unexpected error has occured.");
+    } finally {
+      setLoading(false);
     }
   });
 
   return (
     <div className="max-w-xl space-y-3">
-      {error && (
+      {err && (
         <Callout.Root color="red">
-          <Callout.Text>{error}</Callout.Text>
+          <Callout.Text>{err}</Callout.Text>
         </Callout.Root>
       )}
       <form className="space-y-3" onSubmit={onSubmit}>
         <TextField.Root>
           <TextField.Input placeholder="Title*" {...register("title")} />
         </TextField.Root>
+        {errors.title && (
+          <Text color="red" as="p">
+            {errors.title?.message}
+          </Text>
+        )}
 
         <SimpleMDE
           value={description}
           onChange={(value) => {
             descriptionRef.current = value;
+            setValue("description", value);
           }}
           options={{
             placeholder: "Add a description of the bug...",
             toolbar: toolbarOptions || undefined,
           }}
         />
+        {errors.description && (
+          <Text color="red" as="p">
+            {errors.description?.message}
+          </Text>
+        )}
 
-        <Button>Submit new Issue</Button>
+        <Button disabled={loading}>Submit new Issue</Button>
       </form>
     </div>
   );
