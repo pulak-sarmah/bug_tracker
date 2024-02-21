@@ -24,9 +24,14 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
-        <Theme>
+        <Theme
+          accentColor="blue"
+          grayColor="sand"
+          radius="medium"
+          scaling="95%"
+        >
           <NavBar />
-          <main>{children}</main>
+          <main className="p-5">{children}</main>
         </Theme>
       </body>
     </html>
