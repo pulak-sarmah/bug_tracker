@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
   const validated = createIssueSchema.safeParse(body);
 
   if (!validated.success) {
-    return NextResponse.json(validated.error.errors, { status: 400 });
+    return NextResponse.json(validated.error.format(), { status: 400 });
   }
   const newIssue = await prisma.issue.create({
     data: {
