@@ -1,11 +1,15 @@
 import "@radix-ui/themes/styles.css";
+import "./theme-config.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./NavBar";
 import { Theme } from "@radix-ui/themes";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font--inter",
+});
 
 export const metadata: Metadata = {
   title: "Bug Tracker",
@@ -23,7 +27,7 @@ export default function RootLayout({
         <link rel="icon" href="/public/logo.svg" type="image/svg+xml"></link>
       </head>
 
-      <body className={inter.className}>
+      <body className={inter.variable}>
         <Theme
           accentColor="blue"
           grayColor="sand"
