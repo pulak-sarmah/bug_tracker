@@ -47,7 +47,7 @@ export async function DELETE(
   });
 
   if (!issue) {
-    NextResponse.json({ error: "No issue found" }, { status: 404 });
+    return NextResponse.json({ error: "No issue found" }, { status: 404 });
   }
 
   await prisma.issue.delete({
@@ -56,5 +56,8 @@ export async function DELETE(
     },
   });
 
-  NextResponse.json({ message: "Issue deleted successfully" }, { status: 200 });
+  return NextResponse.json(
+    { message: "Issue deleted successfully" },
+    { status: 200 }
+  );
 }
