@@ -1,11 +1,11 @@
-import { Box } from "@radix-ui/themes";
-import { Skeleton } from "@/app/components";
+import { Box, Skeleton } from "@radix-ui/themes";
 
-const LoadingCreateNewIssuePage = async () => {
+const LoadingCreateNewIssuePage = () => {
   return (
     <Box className="max-w-xl space-y-3">
-      <Skeleton width={"20rem"} />
-      <Skeleton height={"20rem"} />
+      <Skeleton />
+      <Skeleton className="h-40" />
+      test
     </Box>
   );
 };
