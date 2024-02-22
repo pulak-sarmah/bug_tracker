@@ -1,26 +1,12 @@
-"use client";
-import { Button, TextField } from "@radix-ui/themes";
-import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
-import React from "react";
-import { toolbarOptions } from "@/constants/simpleMdeOptions";
+import dynamic from "next/dynamic";
+import IssueFormSkleton from "../_components/IssueFormSkleton";
+const IssueForm = dynamic(() => import("@/app/issues/_components/IssueForm"), {
+  ssr: false,
+  loading: () => <IssueFormSkleton />,
+});
 
 const NewIssuePage = () => {
-  return (
-    <div className="max-w-xl space-y-3">
-      <TextField.Root>
-        <TextField.Input placeholder="Title*" />
-      </TextField.Root>
-      <SimpleMDE
-        options={{
-          placeholder: "Add a description of the bug...",
-          toolbar: toolbarOptions,
-        }}
-      />
-
-      <Button>Submit new Issue</Button>
-    </div>
-  );
+  return <IssueForm />;
 };
 
 export default NewIssuePage;
