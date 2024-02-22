@@ -6,7 +6,7 @@ import { PiNotePencilDuotone } from "react-icons/pi";
 const EditIssueButton = ({ issueId }: { issueId: number }) => {
   return (
     <Link href={`/issues/${issueId}/edit`}>
-      <Button>
+      <Button className="min-w-full">
         <PiNotePencilDuotone />
         Edit Issue
       </Button>
