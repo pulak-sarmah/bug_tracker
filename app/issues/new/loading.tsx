@@ -4,8 +4,7 @@ const LoadingCreateNewIssuePage = () => {
   return (
     <Box className="max-w-xl space-y-3">
       <Skeleton />
-      <Skeleton className="h-40" />
-      test
+      <Skeleton className="h-96" />
     </Box>
   );
 };
