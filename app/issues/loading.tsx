@@ -2,7 +2,7 @@ import { Table } from "@radix-ui/themes";
 import { Skeleton } from "@/app/components";
 import IssueActions from "./IssueActions";
 
-const loadingIssuesPage = () => {
+const LoadingIssuesPage = async () => {
   const issues = [1, 2, 3, 4, 5];
 
   return (
@@ -43,4 +43,4 @@ const loadingIssuesPage = () => {
   );
 };
 
-export default loadingIssuesPage;
+export default LoadingIssuesPage;
