@@ -45,7 +45,7 @@ const IssueStatusFilter = () => {
           if (e.target.value) params.append("title", e.target.value);
           if (searchParams.get("status"))
             params.append("status", searchParams.get("status")!);
-          const query = params.size ? "?" + params.toString() : undefined;
+          const query = params.size ? "?" + params.toString() : "";
           router.push("/issues" + query);
         }}
       />
