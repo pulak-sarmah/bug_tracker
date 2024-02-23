@@ -15,9 +15,14 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   if (error) return null;
 
   const assignIssue = (userId: string) => {
+    if (issue.status === "CLOSED") {
+      toast.error("closed issue can't be modified");
+      return;
+    }
     axios
       .patch("/api/issues/" + issue.id, {
         assignedToUserId: userId === "unassigned" ? null : userId,
+        status: userId === "unassigned" ? "OPEN" : "IN_PROGRESS",
       })
       .then(() => {
         if (userId !== "unassigned") {
@@ -64,4 +69,5 @@ const useUsers = () =>
     retry: 3,
   });
 
+export const dynamic = "force-dynamic";
 export default AssigneeSelect;
