@@ -50,6 +50,9 @@ export async function PATCH(
       assignedToUserId: body.assignedToUserId,
       status: body.status,
     },
+    include: {
+      assignedToUser: true,
+    },
   });
 
   return NextResponse.json(updatedIssue, { status: 201 });
