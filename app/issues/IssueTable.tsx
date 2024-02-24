@@ -1,10 +1,10 @@
-import { Link as NextLink, Table } from "@radix-ui/themes";
+import { Table } from "@radix-ui/themes";
 import React from "react";
 import { BiArrowToTop } from "react-icons/bi";
 import { IssueStatusBadge } from "../components";
 import { Issue, Status } from "@prisma/client";
 import Link from "next/link";
-
+import NextLink from "@/app/components/Link";
 export interface IssueQuery {
   status: Status;
   orderBy: keyof Issue;
@@ -43,6 +43,7 @@ const IssueTable = ({ searchParams, issues }: Props) => {
             </Table.ColumnHeaderCell>
           ))}
         </Table.Row>
+        ``
       </Table.Header>
       <Table.Body>
         {issues.map((issue) => (

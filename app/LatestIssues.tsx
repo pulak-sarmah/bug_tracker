@@ -2,8 +2,9 @@ import { Avatar, Box, Card, Flex, Heading, Table } from "@radix-ui/themes";
 import React from "react";
 import Link from "@/app/components/Link";
 import { IssueStatusBadge } from "./components";
+import prisma from "@/prisma/db";
 const LatestIssues = async () => {
-  const issues = await prisma?.issue.findMany({
+  const issues = await prisma.issue.findMany({
     where: {
       status: {
         not: "CLOSED",
@@ -17,7 +18,7 @@ const LatestIssues = async () => {
       assignedToUser: true,
     },
   });
-  prisma?.issue.findMany({});
+  prisma.issue.findMany({});
   return (
     <>
       {!issues ? (

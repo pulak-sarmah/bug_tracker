@@ -5,14 +5,12 @@ import {
   Container,
   DropdownMenu,
   Flex,
-  Skeleton,
   Text,
 } from "@radix-ui/themes";
 import classNames from "classnames";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GiSkeleton } from "react-icons/gi";
 import { IoBugOutline } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 
