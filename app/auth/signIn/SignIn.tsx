@@ -126,7 +126,7 @@ const SignInCard = ({
         <Button
           disabled={loading}
           className="w-full"
-          variant="solid"
+          variant="surface"
           size={"3"}
           type="submit"
         >
