@@ -2,6 +2,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Container,
   DropdownMenu,
   Flex,
@@ -41,29 +42,33 @@ const AuthStatus = () => {
       {status === "authenticated" && (
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
-            <Avatar
-              src={session.user!.image!}
-              fallback="?"
-              size={"2"}
-              radius="full"
-              className="cursor-pointer"
-              referrerPolicy="no-referrer"
-            />
+            {session.user!.image ? (
+              <Avatar
+                src={session.user!.image!}
+                fallback="?"
+                size={"2"}
+                radius="full"
+                className="cursor-pointer"
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <Box className="w-8 h-8 rounded-full bg-slate-600"></Box>
+            )}
           </DropdownMenu.Trigger>
           <DropdownMenu.Content>
             <DropdownMenu.Label>
               <Text size={"2"}>{session.user?.email}</Text>
             </DropdownMenu.Label>
-            <DropdownMenu.Item>
-              <Link href="/api/auth/signout" className="nav-links">
-                Sign Out
-              </Link>
-            </DropdownMenu.Item>
+            <Link href="/api/auth/signout" className="nav-links">
+              <DropdownMenu.Item>Sign Out</DropdownMenu.Item>
+            </Link>
           </DropdownMenu.Content>
         </DropdownMenu.Root>
       )}
       {status === "unauthenticated" && (
-        <Link href="/api/auth/signin">Sign In</Link>
+        <Link href="/api/auth/signin">
+          <Button variant="soft"> Sign In</Button>
+        </Link>
       )}
     </Box>
   );
