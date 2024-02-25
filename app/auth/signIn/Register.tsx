@@ -141,7 +141,7 @@ const Register = ({
             disabled={loading}
             className="w-full"
             size={"3"}
-            variant="solid"
+            variant="surface"
             type="submit"
           >
             Register
