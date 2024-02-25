@@ -4,7 +4,7 @@ import { BiArrowToTop } from "react-icons/bi";
 import { IssueStatusBadge } from "../components";
 import { Issue, Status } from "@prisma/client";
 import Link from "next/link";
-import NextLink from "@/app/components/Link";
+
 export interface IssueQuery {
   status: Status;
   orderBy: keyof Issue;
@@ -43,13 +43,17 @@ const IssueTable = ({ searchParams, issues }: Props) => {
             </Table.ColumnHeaderCell>
           ))}
         </Table.Row>
-        ``
       </Table.Header>
       <Table.Body>
         {issues.map((issue) => (
           <Table.Row key={issue.id}>
             <Table.Cell>
-              <NextLink href={`/issues/${issue.id}`}>{issue.title}</NextLink>
+              <Link
+                className="text-blue-500 hover:underline"
+                href={`/issues/${issue.id}`}
+              >
+                {issue.title}
+              </Link>
               <div className="block md:hidden">
                 <IssueStatusBadge status={issue.status} />
               </div>
