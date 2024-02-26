@@ -75,72 +75,75 @@ const SignInCard = ({
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <>
       <CardHeader>
         <CardTitle>Sign in to your account</CardTitle>
         <CardDescription>
           Enter your email and password to access your account
         </CardDescription>
       </CardHeader>
+
       <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
-          <TextField.Input
-            size="3"
-            id="email"
-            type="email"
-            {...register("email", {
-              required: "this filed is required",
-              pattern: {
-                value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                message: "invalid email address",
-              },
-            })}
-          />
-          {errors.email && (
-            <p className="text-xs text-red-600">{errors.email.message}</p>
-          )}
-        </div>
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <Label htmlFor="password">Password</Label>
+        <form onSubmit={onSubmit} className="flex flex-col gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <TextField.Input
+              size="3"
+              id="email"
+              type="email"
+              {...register("email", {
+                required: "this filed is required",
+                pattern: {
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  message: "invalid email address",
+                },
+              })}
+            />
+            {errors.email && (
+              <p className="text-xs text-red-600">{errors.email.message}</p>
+            )}
           </div>
-          <TextField.Input
-            {...register("password", {
-              required: "Password is required",
-              min: 6,
-            })}
-            size="3"
-            {...register("password", {
-              required: "this filed is required",
-              minLength: {
-                value: 8,
-                message: "password must be at least 8 character long",
-              },
-            })}
-          />
-          {errors.password && (
-            <p className=" text-xs text-red-600">{errors.password.message}</p>
-          )}
-        </div>
-        <Button
-          disabled={loading}
-          className="w-full"
-          variant="surface"
-          size={"3"}
-          type="submit"
-        >
-          Sign in
-        </Button>
-        <p>Dont have an account?</p>
-        <Button
-          className="w-full"
-          size={"3"}
-          onClick={() => setRegistered(true)}
-          variant="soft"
-        >
-          Register
-        </Button>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <Label htmlFor="password">Password</Label>
+            </div>
+            <TextField.Input
+              {...register("password", {
+                required: "Password is required",
+                min: 6,
+              })}
+              size="3"
+              {...register("password", {
+                required: "this filed is required",
+                minLength: {
+                  value: 8,
+                  message: "password must be at least 8 character long",
+                },
+              })}
+            />
+            {errors.password && (
+              <p className=" text-xs text-red-600">{errors.password.message}</p>
+            )}
+          </div>
+          <Button
+            disabled={loading}
+            className="w-full"
+            variant="surface"
+            size={"3"}
+            type="submit"
+          >
+            Sign in
+          </Button>
+          <p>Dont have an account?</p>
+          <Button
+            className="w-full"
+            size={"3"}
+            onClick={() => setRegistered(true)}
+            variant="soft"
+          >
+            Register
+          </Button>
+        </form>
         <Separator orientation="horizontal" size="4" />
         <Button
           className="w-full"
@@ -151,7 +154,7 @@ const SignInCard = ({
           Sign in with Google
         </Button>
       </CardContent>
-    </form>
+    </>
   );
 };
 

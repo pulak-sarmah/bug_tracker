@@ -37,7 +37,12 @@ const LatestIssues = async () => {
                   <Table.Cell>
                     <Flex justify="between">
                       <Flex direction="column" align="start" gap="2">
-                        <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                        <Link
+                          className="text-blue-500"
+                          href={`/issues/${issue.id}`}
+                        >
+                          {issue.title}
+                        </Link>
                         <Flex gap="2">
                           <IssueStatusBadge status={issue.status} />
                           {issue.createdAt.toDateString()}
